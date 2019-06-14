@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>PLANETAS</h1>
+<p></p>
+<table class = "Planeta Star Wars">
+    <tr>
+        <th> Nombre </th>
+        <td><%= @planet["name"] %></td>
+    </tr>
+    <tr>
+        <th> Gravedad </th>
+        <td><%= @planet["gravity"] %></td>
+    </tr>
+    <tr>
+        <th> Diametro </th>
+        <td><%= @planet["diameter"] %></td>
+    </tr>
+    <tr>
+        <th> Población </th>
+        <td><%= @planet["population"] %></td>
+    </tr>
+    <tr>
+        <th> Agua Superficial </th>
+        <td><%= @planet["surfaceWater"] %></td>
+    </tr>
+    <tr>
+        <th> Periodo Orbital </th>
+        <td><%= @planet["orbitalPeriod"] %></td>
+    </tr>
+    <tr>
+        <th> Periodo Rotacional </th>
+        <td><%= @planet["rotationPeriod"] %></td>
+    </tr>
+    <tr>
+        <th> Climas </th>
+        <td class="parent">
+            <table><tr> 
+                <% @planet["climates"].each do |clima| %>
+                    <td class="child">
+                        <%=clima %>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Terrenos </th>
+        <td class="parent">
+            <table><tr> 
+                <% @planet["terrains"].each do |terreno| %>
+                    <td class="child">
+                        <%= terreno %>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Peliculas </th>
+        <td class="parent">
+            <table><tr> 
+                <% @planet["filmConnection"]["edges"].each do |film| %>
+                    <td class="child">
+                        <a href="<%= "/film/%s" % [film["node"]["id"]] %>" >
+                            <%= film["node"]["title"]%>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Residentes </th>
+        <td class="parent">
+            <table><tr> 
+                <% @planet["residentConnection"]["edges"].each do |resident| %>
+                    <td class="child">
+                        <a href="<%= "/character/%s" % [resident["node"]["id"]] %>" >
+                            <%= resident["node"]["name"]%>
+                        </a> 
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+
+
+</table>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>STAR WARS API</h1>
+<p>Esta es a api de Star Wars</p>
+<table class = "Peliculas Star Wars">
+    <tr>
+        <th> Titulo </th>
+        <th> Fecha de lanzamiento </th>
+        <th> Episodio </th>
+        <th> Director </th>
+        <th> Productores </th>
+    </tr>
+
+    <%   @peliculas.each do |pelicula| %>
+    <tr>
+        <td>
+            <a href="<%= "/film/%s" % [pelicula["node"]["id"]] %>" >
+                <%= pelicula["node"]["title"] %>
+            </a>
+        </td>
+        <td><%= pelicula["node"]["releaseDate"] %></td>
+        <td><%= pelicula["node"]["episodeID"] %></td>
+        <td><%= pelicula["node"]["director"] %></td>
+        <td class="parent">
+            <table><tr> 
+                <% pelicula["node"]["producers"].each do |producer| %>
+                    <td class="child">
+                        <%= producer %>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <% end %>
+
+</table>
+</body>
+</html>

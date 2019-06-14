@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>PERSONAJES</h1>
+<p></p>
+<table class = "Personaje Star Wars">
+    <tr>
+        <th> Nombre </th>
+        <td><%= @character["name"] %></td>
+    </tr>
+     <tr>
+        <th> Año de nacimiento </th>
+        <td><%= @character["birthYear"] %></td>
+    </tr>
+    <tr>
+        <th> Peso </th>
+        <td><%= @character["mass"] %></td>
+    </tr>
+    <tr>
+        <th> Altura </th>
+        <td><%= @character["height"] %></td>
+    </tr>
+    <tr>
+        <th> Genero </th>
+        <td><%= @character["gender"] %></td>
+    </tr>
+    <tr>
+        <th> Color de Cabello </th>
+        <td><%= @character["hairColor"] %></td>
+    </tr>
+    <tr>
+        <th> Color de Ojos </th>
+        <td><%= @character["eyeColor"] %></td>
+    </tr>
+    <tr>
+        <th> Color de Piel </th>
+        <td><%= @character["skinColor"] %></td>
+    </tr>
+    <tr>
+        <th> Planeta de Origen </th>
+            <td>
+                <a href="<%= "/planet/%s" % [@character["homeworld"]["id"]] %>" >
+                    <%= @character["homeworld"]["name"]%>
+                </a>
+            </td>
+    </tr>
+    <tr>
+        <th> Naves </th>
+        <td class="parent">
+            <table><tr> 
+                <% @character["starshipConnection"]["edges"].each do |nave| %>
+                    <td class="child">
+                        <a href="<%= "/ship/%s" % [nave["node"]["id"]] %>" >
+                            <%= nave["node"]["name"] %>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Peliculas </th>
+        <td class="parent">
+            <table><tr> 
+                <% @character["filmConnection"]["edges"].each do |film| %>
+                    <td class="child">
+                        <a href="<%= "/film/%s" % [film["node"]["id"]] %>" >
+                            <%= film["node"]["title"]%>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+
+
+</table>
+</body>
+</html>

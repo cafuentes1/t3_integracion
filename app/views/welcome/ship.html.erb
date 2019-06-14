@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>NAVES</h1>
+<p></p>
+<table class = "Nave Star Wars">
+    <tr>
+        <th> Nombre </th>
+        <td><%= @ship["name"] %></td>
+    </tr>
+     <tr>
+        <th> Crew </th>
+        <td><%= @ship["crew"] %></td>
+    </tr>
+    <tr>
+        <th> MGLT </th>
+        <td><%= @ship["MGLT"] %></td>
+    </tr>
+    <tr>
+        <th> Modelo </th>
+        <td><%= @ship["model"] %></td>
+    </tr>
+    <tr>
+        <th> Largo </th>
+        <td><%= @ship["length"] %></td>
+    </tr>
+    <tr>
+        <th> Pasajeros </th>
+        <td><%= @ship["passengers"] %></td>
+    </tr>
+    <tr>
+        <th> Consumibles </th>
+        <td><%= @ship["consumables"] %></td>
+    </tr>
+    <tr>
+        <th> Clase </th>
+        <td><%= @ship["starshipClass"] %></td>
+    </tr>
+    <tr>
+        <th> Costo en Creditos </th>
+        <td><%= @ship["costInCredits"] %></td>
+    </tr>
+    <tr>
+        <th> Capacidad de Carga </th>
+        <td><%= @ship["cargoCapacity"] %></td>
+    </tr>
+    <tr>
+        <th> Maxima velocidad Atmosferica </th>
+        <td><%= @ship["maxAtmospheringSpeed"] %></td>
+    </tr>
+    <tr>
+        <th> Ranking de Hyperdrive </th>
+        <td><%= @ship["hyperdriveRating"] %></td>
+    </tr>
+    <tr>
+        <th> Fabricantes </th>
+        <td class="parent">
+            <table><tr> 
+                <% @ship["manufacturers"].each do |fabricante| %>
+                    <td class="child">
+                        <%= fabricante %>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Pilotos </th>
+        <td class="parent">
+            <table><tr> 
+                <% @ship["pilotConnection"]["edges"].each do |piloto| %>
+                    <td class="child">
+                        <a href="<%= "/character/%s" % [piloto["node"]["id"]] %>" >
+                            <%= piloto["node"]["name"] %>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Peliculas </th>
+        <td class="parent">
+            <table><tr> 
+                <% @ship["filmConnection"]["edges"].each do |film| %>
+                    <td class="child">
+                        <a href="<%= "/film/%s" % [film["node"]["id"]] %>" >
+                            <%= film["node"]["title"]%>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+
+
+</table>
+</body>
+</html>

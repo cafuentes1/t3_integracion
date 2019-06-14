@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+</style>
+</head>
+<body>
+
+<h1>PELICULAS</h1>
+<p></p>
+<table class = "Pelicula Star Wars">
+    <tr>
+        <th> Titulo </th>
+        <td><%= @film["title"] %></td>
+    </tr>
+    <tr>
+        <th> Fecha de lanzamiento </th>
+        <td><%= @film["releaseDate"] %></td>
+    </tr>
+    <tr>
+        <th> Episodio </th>
+        <td><%= @film["episodeID"] %></td>
+    </tr>
+    <tr>
+        <th> Director </th>
+        <td><%= @film["director"] %></td>
+    </tr>
+    <tr>
+        <th> Productores </th>
+        <td class="parent">
+            <table><tr> 
+                <% @film["producers"].each do |producer| %>
+                    <td class="child">
+                        <%= producer %>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Opening Crawl </th>
+        <td><%= @film["openingCrawl"] %></td>
+    </tr>
+    <tr>
+        <th> Planetas </th>
+        <td class="parent">
+            <table><tr> 
+                <% @film["planetConnection"]["edges"].each do |planeta| %>
+                    <td class="child">
+                        <a href="<%= "/planet/%s" % [planeta["node"]["id"]] %>" >
+                            <%= planeta["node"]["name"] %>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Naves </th>
+        <td class="parent">
+            <table><tr> 
+                <% @film["starshipConnection"]["edges"].each do |nave| %>
+                    <td class="child">
+                        <a href="<%= "/ship/%s" % [nave["node"]["id"]] %>" >
+                            <%= nave["node"]["name"] %>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+    <tr>
+        <th> Personajes </th>
+        <td class="parent">
+            <table><tr> 
+                <% @film["characterConnection"]["edges"].each do |character| %>
+                    <td class="child">
+                        <a href="<%= "/character/%s" % [character["node"]["id"]] %>" >
+                            <%= character["node"]["name"] %>
+                        </a>
+                    </td>
+                <% end %>
+            </tr></table>
+        </td>
+    </tr>
+
+
+</table>
+</body>
+</html>
